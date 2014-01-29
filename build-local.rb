@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-require 'net/http'
-require 'json'
 require 'fileutils'
 require 'time'
 require_relative 'util/registry'

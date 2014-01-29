@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+
 class Registry
   attr_reader :registry, :registry_url
 
