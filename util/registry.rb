@@ -23,9 +23,11 @@ class Registry
 
   def remove_tag(repository_name, tag)
     remove_tag_url = "#{@registry_url}/v1/repositories/#{repository_name}/tags/#{tag}"
-    response = Net::HTTP.delete(URI(remove_tag_url))
-    json = JSON.parse(response)
-    return json
+    uri = URI(remove_tag_url)
+    response = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+      http.delete(remove_tag_url)
+    end
+    return response == Net::HTTPSuccess
   end
 
   def add_tag(repository_name, tag, image_id)
